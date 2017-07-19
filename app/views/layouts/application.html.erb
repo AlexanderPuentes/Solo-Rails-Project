@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TrioProject</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= link_to "Pictures", root_url, class: "navbar" %>
+    <ul class="navbar-nav">
+      <li>
+        <%= link_to "New Post", new_post_path %>
+      </li>
+      <% if current_user %>
+        <li>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, confirm: "Are you sure?" %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to "Login", new_user_session_path %>
+        </li>
+        <li>
+          <%= link_to "Register", new_user_registration_path %>
+        </li>
+      <% end %>
+    </ul>
+    <% flash.each do |a, b| %>
+      <div class"alert alert-success"> <%= b %> </div>
+    <% end %>
+    <%= yield %>
+  </body>
+  <div class="container">
+    <% if notice %><div class="alert alert-info"><%=notice%></div><%end%>
+    <% if alert %><div class="alert alert-warning"><%= alert%></div><%end%>
+  </div>
+</html>
